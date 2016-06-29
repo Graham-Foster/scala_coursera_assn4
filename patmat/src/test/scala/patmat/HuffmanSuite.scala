@@ -21,6 +21,10 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+  test("weight of a single leaf tree") {
+    val t = Leaf('a', 3)
+    assert(weight(t) === 3)
+  }
 
   test("chars of a larger tree") {
     new TestTrees {
