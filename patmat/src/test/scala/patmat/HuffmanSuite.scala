@@ -32,6 +32,13 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+  test("times") {
+    val list = List('a', 'b', 'c', 'b', 'a', 'a')
+    assert(times(list).head === ('a', 3))
+    assert(times(list).tail.head === ('b', 2))
+    assert(times(list).tail.tail.head === ('c', 1))
+  }
+
 
   test("string2chars(\"hello, world\")") {
     assert(string2Chars("hello, world") === List('h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd'))
