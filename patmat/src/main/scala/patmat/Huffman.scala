@@ -219,7 +219,20 @@ object Huffman {
    * This function encodes `text` using the code tree `tree`
    * into a sequence of bits.
    */
-    def encode(tree: CodeTree)(text: List[Char]): List[Bit] = ???
+  def encode(tree: CodeTree)(text: List[Char]): List[Bit] = {
+    if (text.isEmpty) Nil
+    else encodeLetter(tree, text.head) ::: encode(tree)(text.tail)
+  }
+
+  def encodeLetter(tree: CodeTree, char: Char): List[Bit] = {
+    tree match {
+      case Leaf(x, _) => Nil
+      case Fork(left, right, charList, _) => {
+        if (chars(left).contains(char)) 0 :: encodeLetter(left, char)
+        else 1 :: encodeLetter(right, char)
+      }
+    }
+  }
   
   // Part 4b: Encoding using code table
 
