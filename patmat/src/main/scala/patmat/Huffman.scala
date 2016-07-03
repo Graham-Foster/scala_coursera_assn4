@@ -193,7 +193,6 @@ object Huffman {
       case Fork(left, right, _, _) => if (bits.head == 0) decodeLetter(left, bits.tail) else decodeLetter(right, bits.tail)
     }
   }
-
   
   /**
    * A Huffman coding tree for the French language.
@@ -211,7 +210,7 @@ object Huffman {
   /**
    * Write a function that returns the decoded secret
    */
-    def decodedSecret: List[Char] = ???
+    def decodedSecret: List[Char] = decode(frenchCode, secret)
   
 
   // Part 4a: Encoding using Huffman tree
