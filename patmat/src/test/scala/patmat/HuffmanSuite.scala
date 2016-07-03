@@ -12,6 +12,7 @@ class HuffmanSuite extends FunSuite {
 	trait TestTrees {
 		val t1 = Fork(Leaf('a',2), Leaf('b',3), List('a','b'), 5)
 		val t2 = Fork(Fork(Leaf('a',2), Leaf('b',3), List('a','b'), 5), Leaf('d',4), List('a','b','d'), 9)
+    val t_assignment = Fork(Leaf('A',8),Fork(Fork(Leaf('B',3),Fork(Leaf('C',1),Leaf('D',1),List('C', 'D'),2),List('B', 'C', 'D'),5),Fork(Fork(Leaf('E',1),Leaf('F',1),List('E', 'F'),2),Fork(Leaf('G',1),Leaf('H',1),List('G', 'H'),2),List('E', 'F', 'G', 'H'),4),List('B', 'C', 'D', 'E', 'F', 'G', 'H'),9),List('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'),17)
 	}
 
 
@@ -63,6 +64,13 @@ class HuffmanSuite extends FunSuite {
   test("createCodeTree from assignment example") {
     val word = "AAAAAAAABBBCDEFGH";
     assert(createCodeTree(word.toList) === Fork(Leaf('A',8),Fork(Fork(Fork(Leaf('C',1),Leaf('D',1),List('C', 'D'),2),Fork(Leaf('E',1),Leaf('F',1),List('E', 'F'),2),List('C', 'D', 'E', 'F'),4),Fork(Fork(Leaf('G',1),Leaf('H',1),List('G', 'H'),2),Leaf('B',3),List('G', 'H', 'B'),5),List('C', 'D', 'E', 'F', 'G', 'H', 'B'),9),List('A', 'C', 'D', 'E', 'F', 'G', 'H', 'B'),17))
+  }
+
+  test("decode from assignment example") {
+    new TestTrees {
+      val bits: List[Bit] = List(0,1,0,0,1,0,1,0,1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,0,1,1,1,1)
+      assert(decode(t_assignment, bits) === List('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'))
+    }
   }
 
   test("decode and encode a very short text should be identity") {
