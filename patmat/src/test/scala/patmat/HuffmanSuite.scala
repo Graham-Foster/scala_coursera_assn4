@@ -83,4 +83,11 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+  test("codeBits") {
+    val table: CodeTable = List(('A', List(0)), ('B', List(1,0)), ('C', List(1,1)))
+    assert(codeBits(table)('A') === List(0))
+    assert(codeBits(table)('B') === List(1,0))
+    assert(codeBits(table)('C') === List(1,1))
+  }
+
 }
