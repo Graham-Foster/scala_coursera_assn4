@@ -90,4 +90,16 @@ class HuffmanSuite extends FunSuite {
     assert(codeBits(table)('C') === List(1,1))
   }
 
+  test("Convert code tree to code table") {
+    val tree = Fork(Leaf('A', 4), Fork(Leaf('B', 2), Leaf('C', 1), List('B', 'C'), 3), List('A', 'B', 'C'), 7)
+    val table: CodeTable = List(('A', List(0)), ('B', List(1,0)), ('C', List(1,1)))
+    assert(convert(tree) === table)
+  }
+
+  test("quickEncode from assignment example") {
+    new TestTrees {
+      val bits: List[Bit] = List(0,1,0,0,1,0,1,0,1,0,1,1,1,1,0,0,1,1,0,1,1,1,1,0,1,1,1,1)
+      assert(decode(t_assignment, quickEncode(t_assignment)("ABCDEFGH".toList)) === "ABCDEFGH".toList)
+    }
+  }
 }
